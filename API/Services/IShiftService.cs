@@ -8,7 +8,7 @@ public interface IShiftService
 
     void AddShift(Shift shift);
 
-    Task DeleteShift(Shift shift);
+    Task DeleteShift(int id);
 
     Task UpdateShift(Shift shift);
 }

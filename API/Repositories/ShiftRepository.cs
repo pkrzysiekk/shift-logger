@@ -19,9 +19,12 @@ public class ShiftRepository : IShiftRepository
         await SaveChanges();
     }
 
-    public async Task Delete(Shift shift)
+    public async Task Delete(int id)
     {
-        _context.Shifts.Remove(shift);
+        var shiftToDelete = _context.Shifts.FirstOrDefault(shift => shift.Id == id);
+        if (shiftToDelete == null)
+            return;
+        _context.Shifts.Remove(shiftToDelete);
         await SaveChanges();
     }
 

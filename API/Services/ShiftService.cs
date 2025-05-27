@@ -18,14 +18,15 @@ public class ShiftService : IShiftService
         _repository.Add(shift);
     }
 
-    public async Task DeleteShift(Shift shift)
+    public async Task DeleteShift(int id)
     {
-        await _repository.Delete(shift);
+        await _repository.Delete(id);
     }
 
     public async Task<IEnumerable<Shift>> GetShifts()
     {
-        return await _repository.GetAll().ToListAsync();
+        var shifts = await _repository.GetAll().ToListAsync();
+        return shifts;
     }
 
     public async Task UpdateShift(Shift shift)

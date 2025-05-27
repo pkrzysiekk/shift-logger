@@ -10,7 +10,7 @@ public interface IShiftRepository
 
     Task Update(Shift shift);
 
-    Task Delete(Shift shift);
+    Task Delete(int id);
 
     Task SaveChanges();
 }
