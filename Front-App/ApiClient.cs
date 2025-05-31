@@ -35,7 +35,7 @@ public class ShiftApiClient : IShiftClient
 
     public async Task CreateShiftAsync(Shift shift)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/shift", shift);
+        var response = await _httpClient.PostAsJsonAsync("/Shift", shift);
         response.EnsureSuccessStatusCode();
     }
 

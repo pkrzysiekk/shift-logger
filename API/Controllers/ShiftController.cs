@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateShift(Shift shift)
+        public ActionResult CreateShift([FromBody] Shift shift)
         {
             _shiftService.AddShift(shift);
             return Ok("Added succesfully!");

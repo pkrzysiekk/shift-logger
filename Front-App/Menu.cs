@@ -42,7 +42,17 @@ public class Menu
                     break;
 
                 case MenuChoices.AddShift:
-                    // Logic to add a new shift
+                    var shift = UserSelection.CreateShift();
+                    while (shift == null)
+                        shift = UserSelection.CreateShift();
+                    try
+                    {
+                        await _shiftApiClient.CreateShiftAsync(shift);
+                    }
+                    catch (Exception ex)
+                    {
+                        AnsiConsole.MarkupLine($"[red] {ex}[/]");
+                    }
                     AnsiConsole.MarkupLine("[green]Adding a new shift...[/]");
                     break;
 
@@ -57,6 +67,7 @@ public class Menu
                     break;
             }
             selection = GetUserMenuChoice();
+            AnsiConsole.Clear();
         }
     }
 }
