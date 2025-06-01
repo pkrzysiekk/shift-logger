@@ -10,7 +10,7 @@ namespace Front_App.Helpers;
 
 public static class DataVisualizer
 {
-    public static void DisplayShifts(List<Shift> shifts)
+    public static void DisplayShifts(IEnumerable<Shift> shifts)
     {
         if (shifts == null || !shifts.Any())
         {
