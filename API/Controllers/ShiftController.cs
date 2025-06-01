@@ -17,23 +17,23 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateShift([FromBody] Shift shift)
+        public async Task<ActionResult> CreateShift([FromBody] Shift shift)
         {
-            _shiftService.AddShift(shift);
+            await _shiftService.AddShift(shift);
             return Ok("Added succesfully!");
         }
 
         [HttpPut]
-        public ActionResult EditShift([FromBody] Shift shift)
+        public async Task<ActionResult> EditShift([FromBody] Shift shift)
         {
-            _shiftService.UpdateShift(shift);
+            await _shiftService.UpdateShift(shift);
             return Ok("Edited Succesfully!");
         }
 
         [HttpDelete]
-        public ActionResult DeleteShift(int id)
+        public async Task<ActionResult> DeleteShiftAsync(int id)
         {
-            _shiftService.DeleteShift(id);
+            await _shiftService.DeleteShift(id);
             return Ok("Removed Succesfully");
         }
 
@@ -41,10 +41,6 @@ namespace API.Controllers
         public async Task<ActionResult> GetAll()
         {
             var shifts = await _shiftService.GetShifts();
-            if (shifts.IsNullOrEmpty())
-            {
-                return NotFound("No shifts added yet!");
-            }
             return Ok(shifts);
         }
     }
