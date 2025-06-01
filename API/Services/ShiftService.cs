@@ -13,9 +13,9 @@ public class ShiftService : IShiftService
         _repository = repository;
     }
 
-    public void AddShift(Shift shift)
+    public async Task AddShift(Shift shift)
     {
-        _repository.Add(shift);
+        await _repository.Add(shift);
     }
 
     public async Task DeleteShift(int id)
@@ -25,7 +25,7 @@ public class ShiftService : IShiftService
 
     public async Task<IEnumerable<Shift>> GetShifts()
     {
-        var shifts = await _repository.GetAll().ToListAsync();
+        var shifts = await _repository.GetAll().ToListAsync() ?? [];
         return shifts;
     }
 
