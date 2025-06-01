@@ -1,4 +1,6 @@
 ﻿using API.Models;
+using Microsoft.AspNetCore.Http;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,26 +30,58 @@ public class ShiftApiClient : IShiftClient
 
     public async Task<List<Shift>> GetShiftsAsync()
     {
-        var response = await _httpClient.GetAsync("/Shift");
-        response.EnsureSuccessStatusCode();
+        HttpResponseMessage response = new();
+        try
+        {
+            response = await _httpClient.GetAsync("/Shift");
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine($"[red] {ex}[/]");
+        }
         return await response.Content.ReadFromJsonAsync<List<Shift>>();
     }
 
     public async Task CreateShiftAsync(Shift shift)
     {
-        var response = await _httpClient.PostAsJsonAsync("/Shift", shift);
-        response.EnsureSuccessStatusCode();
+        HttpResponseMessage response = new();
+        try
+        {
+            response = await _httpClient.PostAsJsonAsync("/Shift", shift);
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine($"[red] {ex}[/]");
+        }
     }
 
     public async Task UpdateShiftAsync(Shift shift)
     {
-        var response = await _httpClient.PutAsJsonAsync("api/shift", shift);
-        response.EnsureSuccessStatusCode();
+        HttpResponseMessage response = new();
+        try
+        {
+            response = await _httpClient.PutAsJsonAsync("/Shift", shift);
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine($"[red] {ex}[/]");
+        }
     }
 
     public async Task DeleteShiftAsync(int id)
     {
-        var response = await _httpClient.DeleteAsync($"api/shift?id={id}");
-        response.EnsureSuccessStatusCode();
+        HttpResponseMessage response = new();
+        try
+        {
+            response = await _httpClient.DeleteAsync($"/shift?id={id}");
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine($"[red] {ex}[/]");
+        }
     }
 }
